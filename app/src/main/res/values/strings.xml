@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Masil</string>
+
+    <!--  Btm Navi Title  -->
+    <string name="btm_navi_home_title">home</string>
+    <string name="btm_navi_location_title">location</string>
+    <string name="btm_navi_bookmark_title">bookmark</string>
+
 </resources>
