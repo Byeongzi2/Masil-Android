@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.posomo.masil.databinding.FragmentBookmarkBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BookmarkFragment : Fragment() {
 
 	private var _binding: FragmentBookmarkBinding? = null
