@@ -12,23 +12,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
+	private var _binding: ActivityMainBinding? = null
+	private val binding get() = _binding!!
 
-    private lateinit var navController: NavController
+	private lateinit var navController: NavController
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.lifecycleOwner = this
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		_binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+		binding.lifecycleOwner = this
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-        binding.bottomNav.setupWithNavController(navController)
-    }
+		val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+		navController = navHostFragment.navController
+		binding.bottomNav.setupWithNavController(navController)
+	}
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
+	override fun onDestroy() {
+		super.onDestroy()
+		_binding = null
+	}
 }

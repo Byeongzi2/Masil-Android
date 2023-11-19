@@ -70,6 +70,9 @@ dependencies {
     implementation(Dependencies.ViewModels.activity)
     implementation(Dependencies.ViewModels.fragment)
 
+    implementation(Dependencies.imageLoader.glide)
+    kapt(Dependencies.imageLoader.glideCompiler)
+
     testImplementation(Dependencies.test.jUnit)
     androidTestImplementation(Dependencies.test.jUnitExt)
     androidTestImplementation(Dependencies.test.expresso)
