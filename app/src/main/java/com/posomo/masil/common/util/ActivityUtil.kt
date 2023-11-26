@@ -17,6 +17,15 @@ fun Activity.setStatusBarTransparent() {
 	}
 }
 
+fun Activity.setStatusBarVisible() {
+	window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
+	if (Build.VERSION.SDK_INT >= 30) {
+		WindowCompat.setDecorFitsSystemWindows(window, true)
+	}
+}
+
+
 fun Activity.getStatusBarHeight(): Int {
 	val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
 	return if (resourceId > 0) {
