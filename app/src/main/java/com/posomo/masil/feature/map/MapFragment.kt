@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.posomo.masil.common.util.setStatusBarVisible
 import com.posomo.masil.databinding.FragmentMapBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +19,7 @@ class MapFragment : Fragment() {
 		savedInstanceState: Bundle?
 	): View {
 		_binding = FragmentMapBinding.inflate(inflater, container, false)
+		requireActivity().setStatusBarVisible()
 		return binding.root
 	}
 

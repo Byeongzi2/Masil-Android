@@ -1,22 +1,25 @@
 package com.posomo.masil.feature.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.CompositePageTransformer
-import androidx.viewpager2.widget.MarginPageTransformer
-import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.posomo.masil.common.util.getStatusBarHeight
-import com.posomo.masil.common.util.setStatusBarTransparent
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.posomo.masil.common.ui.adapter.CommonAdapter
+import com.posomo.masil.common.ui.definition.OnViewHolderAction
+import com.posomo.masil.common.ui.definition.ViewHolderActionEvent
+import com.posomo.masil.common.ui.navigation.deepLinkNavigateTo
 import com.posomo.masil.databinding.FragmentHomeBinding
-import com.posomo.masil.model.HomeBannerImageInfo
+import com.posomo.masil.domain.model.constants.ViewType
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.abs
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -26,7 +29,7 @@ class HomeFragment : Fragment() {
 
 	private val viewModel by viewModels<HomeViewModel>()
 
-	private var isBannerBackgroundHeightResized = false
+	private val commonAdapter by lazy { CommonAdapter(requireActivity(), onViewHolderActionListener) }
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -39,72 +42,58 @@ class HomeFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		adjustStatusBarToTransparent()
-		initHomeBanner()
+		initUI()
+		observeFlow()
 	}
 
-	private fun initHomeBanner() {
-		initHomeBannerSetting(viewModel.getDummyData().imageInfoList)
-		initHomeBannerHeight()
-	}
-
-	private fun initHomeBannerSetting(
-		bannerImageInfoList: List<HomeBannerImageInfo>,
-		bannerOffsetScreenPageLimit: Int = 3,
-	) {
-		binding.vpHomeBannerImages.apply {
-			adapter = HomeBannerImageSlideAdapter(bannerImageInfoList)
-			clipToPadding = false
-			clipChildren = false
-			offscreenPageLimit = bannerOffsetScreenPageLimit
-			getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-			setPageTransformer(getCompositePageTransformer())
-			registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-				override fun onPageSelected(position: Int) {
-					super.onPageSelected(position)
-
-					initBannerBackground(position)
+	private fun observeFlow() {
+		lifecycleScope.launch {
+			repeatOnLifecycle(Lifecycle.State.STARTED) {
+				viewModel.commonDataFlow.collectLatest {
+					Log.e("Test@@@", "$it")
+					commonAdapter.submitList(it)
 				}
-
-				private fun initBannerBackground(position: Int) {
-					Glide.with(requireActivity())
-						.load(viewModel.getDummyData().imageInfoList[position].blurImageUrl)
-						.into(binding.imgHomeTopAreaBackground)
-				}
-			})
-		}
-	}
-
-	private fun initHomeBannerHeight() {
-		binding.vpHomeBannerImages.viewTreeObserver.addOnGlobalLayoutListener {
-			if (!isBannerBackgroundHeightResized) {
-				val bgLp = binding.imgHomeTopAreaBackground.layoutParams
-				bgLp.height = binding.vpHomeBannerImages.bottom - 100
-				binding.imgHomeTopAreaBackground.layoutParams = bgLp
-				isBannerBackgroundHeightResized = true
 			}
 		}
 	}
 
-	private fun getCompositePageTransformer() = 
-		CompositePageTransformer().apply {
-			addTransformer(MarginPageTransformer(40))
-			addTransformer { page, position ->
-				val r = 1 - abs(position)
-				page.scaleY = 0.85f + r * 0.15f
-			}
-		}
-
-	private fun adjustStatusBarToTransparent() {
-		requireActivity().setStatusBarTransparent()
-		binding.homeInnerContainer.setPadding(
-			0,
-			requireActivity().getStatusBarHeight(),
-			0,
-			0
-		)
+	private fun initUI() {
+		initHomeRv()
 	}
 
+	private fun initHomeRv() {
+		binding.rvHome.apply {
+			setHasFixedSize(true)
+			adapter = commonAdapter
+		}
+	}
+
+	private val onViewHolderActionListener = object : OnViewHolderAction {
+		override fun onAction(viewType: ViewType, actionEvent: ViewHolderActionEvent) =
+			when (viewType) {
+				ViewType.SectionViewType -> {
+					provideSectionViewTypeEvent(actionEvent)
+				}
+
+				else -> {}
+			}
+	}
+
+	private fun provideSectionViewTypeEvent(actionEvent: ViewHolderActionEvent) = when (actionEvent) {
+		is ViewHolderActionEvent.ViewMoreEvent -> {
+			val destination = actionEvent.destination
+			findNavController().deepLinkNavigateTo(requireContext(), destination)
+		}
+		else -> {
+
+		}
+	}
+
+//	override fun onDestroyView() {
+//		super.onDestroyView()
+//
+//		requireActivity().setStatusBarVisible()
+//	}
 
 	companion object {
 		@JvmStatic

@@ -1,30 +1,29 @@
-package com.posomo.masil.feature.bookmark
+package com.posomo.masil.feature.temp
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.posomo.masil.common.util.setStatusBarVisible
-import com.posomo.masil.databinding.FragmentBookmarkBinding
+import com.posomo.masil.databinding.FragmentTempBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookmarkFragment : Fragment() {
+class TempFragment : Fragment() {
 
-	private var _binding: FragmentBookmarkBinding? = null
+	private var _binding: FragmentTempBinding? = null
 	private val binding get() = _binding!!
+
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
-		_binding = FragmentBookmarkBinding.inflate(inflater, container, false)
-		requireActivity().setStatusBarVisible()
+		_binding = FragmentTempBinding.inflate(inflater, container, false)
 		return binding.root
 	}
 
 	companion object {
 		@JvmStatic
-		fun newInstance() = BookmarkFragment()
+		fun newInstance() = TempFragment()
 	}
 }
