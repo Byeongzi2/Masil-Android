@@ -9,15 +9,47 @@
         android:id="@+id/homeFragment"
         android:name="com.posomo.masil.feature.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+
+        <deepLink
+            app:uri="@string/home_deeplink_url" />
+    </fragment>
+
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.posomo.masil.feature.map.MapFragment"
         android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+
+        <deepLink
+            app:uri="@string/map_deeplink_url" />
+    </fragment>
+
     <fragment
         android:id="@+id/bookmarkFragment"
         android:name="com.posomo.masil.feature.bookmark.BookmarkFragment"
         android:label="fragment_bookmark"
-        tools:layout="@layout/fragment_bookmark" />
+        tools:layout="@layout/fragment_bookmark" >
+
+        <deepLink
+            app:uri="@string/bookmark_deeplink_url" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tempFragment"
+        android:name="com.posomo.masil.feature.temp.TempFragment"
+        android:label="TempFragment" >
+
+        <deepLink
+            app:uri="@string/temp1_deeplink_url" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/temp2Fragment"
+        android:name="com.posomo.masil.feature.temp.Temp2Fragment"
+        android:label="Temp2Fragment" >
+
+        <deepLink
+            app:uri="@string/temp2_deeplink_url" />
+    </fragment>
 </navigation>
