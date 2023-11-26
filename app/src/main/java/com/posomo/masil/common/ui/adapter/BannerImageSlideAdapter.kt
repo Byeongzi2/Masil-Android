@@ -1,15 +1,15 @@
-package com.posomo.masil.feature.home
+package com.posomo.masil.common.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.posomo.masil.databinding.SlideItemContainerBinding
-import com.posomo.masil.model.HomeBannerImageInfo
+import com.posomo.masil.domain.model.content.BannerImageInfoVO
 
-class HomeBannerImageSlideAdapter(
-	private val items: List<HomeBannerImageInfo>
-) : RecyclerView.Adapter<HomeBannerImageSlideAdapter.SliderViewHolder>() {
+class BannerImageSlideAdapter(
+	private val items: List<BannerImageInfoVO>
+) : RecyclerView.Adapter<BannerImageSlideAdapter.SliderViewHolder>() {
 
 	class SliderViewHolder(private val binding: SlideItemContainerBinding) : RecyclerView.ViewHolder(binding.root) {
 		fun bind(item: String) {
