@@ -19,7 +19,6 @@ class CommonAdapter(
 		onItemsTheSame = { old, new -> old.id == new.id }
 	)
 ) {
-
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonViewHolder {
 		return CommonVHFactory.createViewHolder(
 			parent = parent,

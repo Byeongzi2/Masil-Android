@@ -2,6 +2,7 @@
 <resources>
     <string name="home_deeplink_url">masil://home</string>
     <string name="map_deeplink_url">masil://map</string>
+    <string name="store_detail_deeplink_url">masil://store/detail</string>
     <string name="bookmark_deeplink_url">masil://bookmark</string>
     <string name="temp1_deeplink_url">masil://temp1</string>
     <string name="temp2_deeplink_url">masil://temp2</string>

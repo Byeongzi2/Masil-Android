@@ -5,6 +5,7 @@ import com.posomo.masil.domain.model.constants.ViewType
 
 sealed class ViewHolderActionEvent {
 	data object Click : ViewHolderActionEvent()
+	data class StoreClick(val destination: DeepLinkDestination, val storeId: Long) : ViewHolderActionEvent()
 	data class ViewMoreEvent(val destination: DeepLinkDestination) : ViewHolderActionEvent()
 }
 

@@ -83,6 +83,10 @@ class HomeFragment : Fragment() {
 			val destination = actionEvent.destination
 			findNavController().deepLinkNavigateTo(requireContext(), destination)
 		}
+		is ViewHolderActionEvent.StoreClick -> {
+			val destination = actionEvent.destination
+			findNavController().deepLinkNavigateTo(requireContext(), destination)
+		}
 		else -> {
 
 		}

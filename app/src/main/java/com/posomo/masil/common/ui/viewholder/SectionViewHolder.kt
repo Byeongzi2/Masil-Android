@@ -28,7 +28,7 @@ class SectionViewHolder(
 		} else {
 			StoreOrientation.LANDSCAPE
 		}
-		val storeAdapter = StoreAdapter(storeOrientation)
+		val storeAdapter = StoreAdapter(storeOrientation, onClick)
 
 		binding.section = section
 		binding.itemSectionViewMore.setOnClickListener {

@@ -25,7 +25,7 @@ class HomeBannerViewHolder(
 	override fun bind(data: ContentVO) {
 		val bannerInfo = data as HomeBannerVO
 
-		adjustStatusBarToTransparent()
+//		adjustStatusBarToTransparent()
 		initHomeBanner(bannerInfo)
 	}
 

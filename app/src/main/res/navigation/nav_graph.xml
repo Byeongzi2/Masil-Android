@@ -41,6 +41,15 @@
     </fragment>
 
     <fragment
+        android:id="@+id/storeDetailFragment"
+        android:name="com.posomo.masil.feature.store.detail.StoreDetailFragment"
+        android:label="StoreDetailFragment">
+
+        <deepLink
+            app:uri="@string/store_detail_deeplink_url" />
+    </fragment>
+
+    <fragment
         android:id="@+id/tempFragment"
         android:name="com.posomo.masil.feature.temp.TempFragment"
         android:label="TempFragment" >
