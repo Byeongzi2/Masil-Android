@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
 		lifecycleScope.launch {
 			repeatOnLifecycle(Lifecycle.State.STARTED) {
 				viewModel.commonDataFlow.collectLatest {
-					Log.e("Test@@@", "$it")
 					commonAdapter.submitList(it)
 				}
 			}

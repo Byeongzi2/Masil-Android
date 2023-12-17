@@ -17,9 +17,14 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.posomo.masil.feature.map.MapFragment"
+        android:name="com.posomo.masil.feature.map.BarMapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
+
+        <argument
+            android:name="latLng"
+            app:argType="com.posomo.masil.domain.model.Location"
+            app:nullable="true" />
 
         <deepLink
             app:uri="@string/map_deeplink_url" />

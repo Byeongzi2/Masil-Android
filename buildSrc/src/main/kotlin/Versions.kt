@@ -4,12 +4,12 @@ object Versions {
     const val appCompact = "1.6.1"
     const val material = "1.10.0"
     const val lifecycle = "2.5.0"
-    const val navigation = "2.5.3"
+    const val navigation = "2.7.6"
     const val constraint = "2.1.4"
     const val splash = "1.0.0-beta01"
 
     // DI
-    const val hilt = "2.44"
+    const val hilt = "2.49"
 
     // Coroutine
     const val coroutine = "1.6.4"
@@ -33,8 +33,8 @@ object Versions {
     const val datastore = "1.0.0"
 
     // Naver Map
-    const val map = "3.16.2"
-    const val location = "16.0.0"
+    const val map = "3.17.0"
+    const val location = "21.0.1"
 
     // Data Store
     const val preferences = "1.0.0"
