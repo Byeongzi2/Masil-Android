@@ -104,5 +104,4 @@ object Dependencies {
         val jUnitExt by lazy { "androidx.test.ext:junit:${Versions.junitExt}" }
         val expresso by lazy { "androidx.test.espresso:espresso-core:${Versions.espresso}" }
     }
-
 }

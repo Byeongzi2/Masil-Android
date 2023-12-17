@@ -3,6 +3,7 @@ package com.posomo.masil.common.util
 import android.app.Activity
 import android.os.Build
 import android.view.WindowManager
+import androidx.annotation.ColorRes
 import androidx.core.view.WindowCompat
 
 fun Activity.setStatusBarTransparent() {
@@ -33,4 +34,8 @@ fun Activity.getStatusBarHeight(): Int {
 	} else {
 		0
 	}
+}
+
+fun Activity.setStatusBarTextColor(isLightStatusBar: Boolean) {
+	WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = isLightStatusBar
 }

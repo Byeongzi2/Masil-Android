@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="model"
+            type="com.posomo.masil.domain.model.StoreOnMap" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@{model.name}"
+            android:textColor="@color/gray_900"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvOpen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:visibility="@{model.isOpen ? View.VISIBLE : View.GONE }"
+            app:cardBackgroundColor="@color/red_orange_50"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvName"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="@id/tvName">
+
+            <TextView
+                android:id="@+id/tvOpen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="1dp"
+                android:text="@string/open"
+                android:textColor="@color/red_orange_500"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:visibility="@{model.isOpen ? View.GONE : View.VISIBLE}"
+            app:cardBackgroundColor="@color/gray_50"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvName"
+            app:layout_constraintStart_toEndOf="@id/tvName"
+            app:layout_constraintTop_toTopOf="@id/tvName">
+
+            <TextView
+                android:id="@+id/tvClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="1dp"
+                android:text="@string/close"
+                android:textColor="@color/gray_500"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/ivBookmark"
+            mapToBookmark="@{model.isBookMarked}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvName" />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{model.location}"
+            android:textColor="@color/gray_600"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="Location" />
+
+        <View
+            android:id="@+id/tvDecor"
+            android:layout_width="1dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/gray_200"
+            app:layout_constraintBottom_toBottomOf="@id/tvLocation"
+            app:layout_constraintStart_toEndOf="@id/tvLocation"
+            app:layout_constraintTop_toTopOf="@id/tvLocation" />
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/gray_600"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvLocation"
+            app:layout_constraintStart_toEndOf="@id/tvDecor"
+            app:layout_constraintTop_toTopOf="@id/tvLocation"
+            tools:text="Category" />
+
+        <HorizontalScrollView
+            android:id="@+id/hsvContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingHorizontal="24dp"
+            app:layout_constraintTop_toBottomOf="@id/tvLocation">
+
+            <LinearLayout
+                imageList="@{model.images}"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
