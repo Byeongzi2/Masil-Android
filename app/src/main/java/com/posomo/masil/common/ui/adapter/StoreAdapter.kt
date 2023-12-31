@@ -15,7 +15,7 @@ import com.posomo.masil.domain.model.Store
 
 class StoreAdapter(
 	private val orientation: StoreOrientation,
-	private val storeClick: (ViewHolderActionEvent) -> Unit
+	private val storeClick: (ViewHolderActionEvent) -> Unit = {}
 ) : ListAdapter<Store, StoreAdapter.StoreViewHolder>(
 	ItemDiffCallback<Store>(
 		onContentsTheSame = { old, new -> old == new },
